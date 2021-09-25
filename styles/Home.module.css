@@ -46,6 +46,11 @@
   flex-grow: 1;
 }
 
+.canvas {
+  flex-grow: 1;
+  position: relative;
+}
+
 .title a {
   color: #0070f3;
   text-decoration: none;
