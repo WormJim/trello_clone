@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 
-const Home: NextPage = () => {
-  return <div className={styles.container}> </div>;
+const App: NextPage = () => {
+  return <div id='trello-root' className={styles.root}></div>;
 };
 
-export default Home;
+export default App;

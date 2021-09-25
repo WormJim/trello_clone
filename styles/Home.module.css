@@ -1,3 +1,15 @@
+#trello-root {
+  height: 100%;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.root {
+  background-position: 50%;
+  background-size: cover;
+}
+
 .container {
   min-height: 100vh;
   padding: 0 0.5rem;
@@ -15,6 +27,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #00c2e0;
 }
 
 .footer {
