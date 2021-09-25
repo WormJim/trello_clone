@@ -1,7 +1,34 @@
 #trello-root {
+  height: 100vh;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+#container {
   height: 100%;
   position: relative;
   z-index: 1;
+  overflow: hidden;
+}
+
+#content {
+  outline: none;
+  overflow-y: auto;
+  position: relative;
+  flex-grow: 1;
+}
+
+.surface {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.body-board-view {
+  background-position: 50%;
+  background-size: cover;
   overflow: hidden;
 }
 
@@ -20,14 +47,28 @@
   height: 100vh;
 }
 
-.main {
-  padding: 5rem 0;
-  flex: 1;
+.column {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #00c2e0;
+  flex: 1 1 0%;
+  overflow-y: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 0%;
+  position: relative;
+  overflow-y: auto;
+}
+
+.main {
+  position: relative;
+  overflow-y: auto;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .footer {
