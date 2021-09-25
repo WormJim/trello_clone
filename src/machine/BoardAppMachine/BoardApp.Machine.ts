@@ -46,7 +46,7 @@ export const BoardAppMachine = createMachine<Context, Event>({
     deleting: {
       always: [
         { target: 'new', cond: (context) => context.boards.length === 0 },
-        { target: 'timer' },
+        { target: 'board' },
       ],
     },
   },
