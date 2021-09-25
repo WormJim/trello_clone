@@ -51,6 +51,7 @@ export const BoardAppMachine = createMachine<Context, Event>({
     },
   },
   on: {
+    CREATE: 'new',
     ADD: {
       target: '.board',
       actions: assign((context) => {
