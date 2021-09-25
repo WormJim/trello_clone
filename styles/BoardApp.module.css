@@ -224,3 +224,11 @@
   color: #6b778c;
   margin-right: 2px;
 }
+
+.boarder-header {
+  min-height: 10vh;
+  height: auto;
+  padding: 8px 4px 4px 8px;
+  position: relative;
+  background: #0000003d;
+}
