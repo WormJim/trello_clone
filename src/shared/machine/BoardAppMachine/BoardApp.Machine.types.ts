@@ -5,6 +5,6 @@ export interface BoardAppMachineContext {
 
 export type BoardAppMahcineEvent =
   | { type: 'ADD' }
+  | { type: 'CANCEL' }
   | { type: 'SWITCH'; index: number }
-  | { type: 'DELETE'; index: number }
-  | { type: 'CANCEL'; index: number };
+  | { type: 'DELETE'; index: number };
