@@ -76,5 +76,16 @@ export const createItemMachine = (name: string): ItemMachine =>
           },
         }),
       },
+      CHANGE_NAME: {
+        actions: assign({
+          name: (context, event) => {
+            if (event.type === 'CHANGE_NAME') {
+              return event.name;
+            }
+
+            return context.name;
+          },
+        }),
+      },
     },
   });

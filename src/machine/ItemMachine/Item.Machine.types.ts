@@ -9,6 +9,7 @@ export interface ItemMachineContext {
 export type ItemMachineEvent =
   | { type: 'CANCEL' }
   | { type: 'CREATE' }
+  | { type: 'CHANGE_NAME'; name: string }
   | { type: 'ADD'; name: string }
   | { type: 'SWITCH'; index: number }
   | { type: 'DELETE'; index: number };
