@@ -1,9 +1,11 @@
-import { assign, createMachine, spawn, StateMachine } from 'xstate';
-import { ItemMachineContext, ItemMachineEvent } from './Item.Machine.types';
+import { assign, createMachine, spawn } from 'xstate';
+import {
+  ItemMachine,
+  ItemMachineContext,
+  ItemMachineEvent,
+} from './Item.Machine.types';
 
-export const createItemMachine = (
-  name: string,
-): StateMachine<ItemMachineContext, any, ItemMachineEvent> =>
+export const createItemMachine = (name: string): ItemMachine =>
   createMachine<ItemMachineContext, ItemMachineEvent>({
     initial: 'new',
     context: {
