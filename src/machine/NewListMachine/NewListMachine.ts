@@ -5,6 +5,7 @@ interface NewListContext {
 }
 
 export type NewListEvent =
+  | { type: 'CLEAR' }
   | { type: 'CHANGE'; input: string }
   | { type: 'SUBMIT'; input: string };
 
