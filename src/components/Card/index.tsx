@@ -19,14 +19,11 @@ const CardList = ({ cards, hide, onAdd }: CardListProps) => {
           styles['list-cards'],
           styles['fancy-scrollbar'],
           styles['u-clearfix'],
-        )}
-      />
-
-      {cards.map((card, index) => {
-        console.log('card', card);
-        <Card cardRef={card} key={index} />;
-      })}
-
+        )}>
+        {cards.map((card, index) => (
+          <Card cardRef={card} key={index} />
+        ))}
+      </div>
       <CardComposer hide={hide} addItem={onAdd} />
     </>
   );
