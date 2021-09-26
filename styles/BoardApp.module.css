@@ -568,3 +568,20 @@ body .nch-button {
 .icon-template-card:before {
   content: '\e96e';
 }
+
+.list-card-details {
+  overflow: hidden;
+  padding: 6px 8px 2px;
+  position: relative;
+  z-index: 10;
+}
+
+.list-card-title {
+  word-wrap: break-word;
+  clear: both;
+  color: #172b4d;
+  display: block;
+  margin: 0 0 4px;
+  overflow: hidden;
+  text-decoration: none;
+}
