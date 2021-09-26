@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import BoardApp from '../src/components/BoardApp';
+import Board from '../src/components/BoardApp';
 import styles from '../styles/Root.module.css';
 
 const App: NextPage = () => {
@@ -14,7 +14,7 @@ const App: NextPage = () => {
           }}>
           <div id={styles['surface']} className={styles.surface}>
             <main className={styles.main}>
-              <BoardApp />
+              <Board />
             </main>
           </div>
         </div>
