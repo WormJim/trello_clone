@@ -1,8 +1,6 @@
 import classNames from 'classnames';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '../../../styles/BoardApp.module.css';
-
-const returnUndefined = () => undefined;
 
 interface CardComposerProps {
   hide: boolean;
@@ -10,17 +8,23 @@ interface CardComposerProps {
 }
 
 const CardComposer = ({ hide, addItem }: CardComposerProps) => {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [value, setValue] = useState('');
 
   const handleClose = useCallback(
     (save: boolean) => {
-      console.log('save', save);
-
       addItem(save ? value : undefined);
       setValue('');
+      textareaRef.current?.blur();
     },
     [addItem, value],
   );
+
+  useEffect(() => {
+    if (hide) {
+      textareaRef.current?.focus();
+    }
+  }, [hide]);
 
   return (
     <div className={classNames(styles['card-composer'], !hide && styles.hide)}>
@@ -37,6 +41,7 @@ const CardComposer = ({ hide, addItem }: CardComposerProps) => {
             )}
           />
           <textarea
+            ref={textareaRef}
             className={styles['list-card-composer-textarea']}
             dir='auto'
             placeholder='Enter a title for this card…'
