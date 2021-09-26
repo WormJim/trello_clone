@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from '../../../styles/BoardApp.module.css';
 
-interface BoardHeaderProps {}
+interface BoardHeaderProps {
+  name: string;
+}
 
-const BoardHeader = ({}: BoardHeaderProps) => {
+const BoardHeader = ({ name }: BoardHeaderProps) => {
   return (
     <div className={styles['boarder-header']}>
-      <h1>{`Trello Board`}</h1>
+      <h1>{name}</h1>
     </div>
   );
 };
