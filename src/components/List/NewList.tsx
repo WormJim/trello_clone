@@ -1,6 +1,13 @@
 import { useMachine } from '@xstate/react';
 import classNames from 'classnames';
-import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styles from '../../../styles/BoardApp.module.css';
 import { NewListMachine } from '../../machine/NewListMachine/NewListMachine';
 
@@ -10,6 +17,7 @@ interface NewListProps {
 }
 
 const NewList = ({ onAdd }: NewListProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [idle, setIdle] = useState(true);
   const [state, send] = useMachine(NewListMachine, {
     actions: {
@@ -37,11 +45,15 @@ const NewList = ({ onAdd }: NewListProps) => {
     [send],
   );
 
+  useEffect(() => {
+    if (!idle) {
+      inputRef.current?.focus();
+    }
+  }, [idle]);
+
   return (
     <div
       className={classNames(
-        styles['add-list'],
-        styles['list'],
         styles['list-wrapper'],
         styles['mod-add'],
         idle && styles['is-idle'],
@@ -59,6 +71,7 @@ const NewList = ({ onAdd }: NewListProps) => {
           </span>
         </a>
         <input
+          ref={inputRef}
           type='text'
           name='name'
           placeholder='Enter list title...'
