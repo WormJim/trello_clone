@@ -1,5 +1,5 @@
 import { assign, createMachine, spawn, StateMachine } from 'xstate';
-import { ItemMachineContext, ItemMachineEvent } from './BoardApp.Machine.types';
+import { ItemMachineContext, ItemMachineEvent } from './Item.Machine.types';
 
 export const createItemMachine = (
   name: string,
