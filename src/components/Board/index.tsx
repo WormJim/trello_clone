@@ -1,11 +1,11 @@
 import { useMachine } from '@xstate/react';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { BoardAppMachine } from '../../machine/BoardAppMachine/BoardApp.Machine';
+import List from '../List';
+import NewList from '../List/NewList';
 import BoardCanvas from './BoardCanvas';
 import BoardContainer from './BoardContainer';
 import BoardHeader from './BoardHeader';
-import List from '../List';
-import NewList from '../List/NewList';
 
 const Board = () => {
   const [state, send] = useMachine(BoardAppMachine);
