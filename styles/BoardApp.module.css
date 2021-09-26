@@ -585,3 +585,30 @@ body .nch-button {
   overflow: hidden;
   text-decoration: none;
 }
+
+.list-wrapper.ui-sortable-helper > .list {
+  box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
+  cursor: grabbing;
+  transform: rotate(4deg);
+}
+
+.list-wrapper.ui-sortable-helper > .list .list-header-menu-icon {
+  display: none;
+}
+
+.list-card.ui-sortable-helper {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
+  cursor: grabbing;
+  transform: rotate(4deg);
+}
+
+.list-card.ui-sortable-helper .list-card-title {
+  cursor: grabbing;
+}
+
+.list-card.ui-sortable-helper .list-card-details {
+  background-color: #fff;
+  border-radius: 3px;
+}

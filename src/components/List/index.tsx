@@ -11,9 +11,10 @@ interface ListProps {
   listRef: ItemMachine;
   onDelete?: () => void;
   onAdd?: () => void;
+  id: number;
 }
 
-const List = ({ listRef }: ListProps) => {
+const List = ({ listRef, id }: ListProps) => {
   const [toggle, setToggle] = useToggle(false);
   const [state, send] = useActor(listRef);
   const { items: cards } = state.context;
@@ -21,7 +22,6 @@ const List = ({ listRef }: ListProps) => {
   const addItem = (name?: string) => {
     setToggle();
     if (name) {
-      console.log('name', name);
       send({ type: 'ADD', name });
     }
   };
@@ -31,7 +31,7 @@ const List = ({ listRef }: ListProps) => {
   };
 
   return (
-    <ListContainer>
+    <ListContainer draggable id={id}>
       <ListHeader name={state.context.name} onChange={changeName} />
       <CardList cards={cards} hide={toggle} onAdd={addItem} />
       <ListFooter onAdd={setToggle} hide={toggle} />

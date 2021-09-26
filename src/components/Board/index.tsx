@@ -18,11 +18,7 @@ const Board = () => {
       <BoardHeader name={state.context.name} />
       <BoardCanvas>
         {lists.map((list, index) => (
-          <List
-            key={list.id}
-            listRef={list}
-            data-active={index === state.context.currentItem || undefined}
-          />
+          <List key={list.id} id={index} listRef={list} />
         ))}
         <NewList
           onAdd={addList}
