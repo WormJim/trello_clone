@@ -33,6 +33,17 @@ export const NewListMachine = createMachine<NewListContext, NewListEvent>({
         SUBMIT: {
           cond: isNotEmpty,
           actions: 'submit',
+          target: 'clear',
+        },
+      },
+    },
+    clear: {
+      on: {
+        CLEAR: {
+          target: 'active',
+          actions: assign({
+            name: '',
+          }),
         },
       },
     },

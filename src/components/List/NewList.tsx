@@ -13,7 +13,11 @@ const NewList = ({ onAdd }: NewListProps) => {
   const [idle, setIdle] = useState(true);
   const [state, send] = useMachine(NewListMachine, {
     actions: {
-      submit: (ctx) => onAdd(ctx.name),
+      submit: (ctx) => {
+        setIdle((curr) => !curr);
+        onAdd(ctx.name);
+        send({ type: 'CLEAR' });
+      },
     },
   });
 
@@ -61,6 +65,7 @@ const NewList = ({ onAdd }: NewListProps) => {
           autoComplete='off'
           maxLength={512}
           className={styles['list-name-input']}
+          value={state.context.name}
           onChange={onChange}
         />
 
