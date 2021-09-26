@@ -1,20 +1,22 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../../styles/BoardApp.module.css';
+import { useToggle } from '../../hooks/useToggle';
+import NewCard from '../Card/NewCard';
 
 interface ListFooterProps {
-  onAdd: (name: string) => void;
+  hide: boolean;
+  onAdd: () => void;
 }
 
-const ListFooter = ({}: ListFooterProps) => {
+const ListFooter = ({ hide, onAdd }: ListFooterProps) => {
   return (
-    <div className={styles['card-composer-container']}>
-      <a className={styles['open-card-composer']} href='#'>
-        <span
-          className={classNames(styles['icon-sm'], styles['icon-add'])}></span>
-        <span>Add a card</span>
-      </a>
-
+    <div
+      className={classNames(
+        styles['card-composer-container'],
+        hide && styles['hide'],
+      )}>
+      <NewCard onAdd={onAdd} />
       <div className='card-templates-button-container dark-background-hover'>
         <div>
           <div role='presentation'>
@@ -23,7 +25,13 @@ const ListFooter = ({}: ListFooterProps) => {
               role='button'
               href='#'
               aria-label='Create from template…'>
-              <span className='icon-sm icon-template-card dark-backgr ound-hover'></span>
+              <span
+                className={classNames(
+                  styles['icon-sm'],
+                  styles['icon-template-card'],
+                  styles['dark-background-hover'],
+                )}
+              />
             </a>
           </div>
         </div>

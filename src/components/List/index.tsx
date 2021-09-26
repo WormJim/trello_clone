@@ -1,8 +1,8 @@
 import { useActor } from '@xstate/react';
-import classNames from 'classnames';
 import React from 'react';
-import styles from '../../../styles/BoardApp.module.css';
+import { useToggle } from '../../hooks/useToggle';
 import { ItemMachine } from '../../machine/ItemMachine/Item.Machine.types';
+import CardList from '../Card';
 import ListContainer from './ListContainer';
 import ListFooter from './ListFooter';
 import ListHeader from './ListHeader';
@@ -14,9 +14,17 @@ interface ListProps {
 }
 
 const List = ({ listRef }: ListProps) => {
+  const [toggle, setToggle] = useToggle(false);
   const [state, send] = useActor(listRef);
+  const { items: cards } = state.context;
 
-  const addItem = (name: string) => send({ type: 'ADD', name });
+  const addItem = (name?: string) => {
+    setToggle();
+    if (name) {
+      console.log('name', name);
+      send({ type: 'ADD', name });
+    }
+  };
 
   const changeName = (name: string) => {
     send({ type: 'CHANGE_NAME', name });
@@ -25,10 +33,8 @@ const List = ({ listRef }: ListProps) => {
   return (
     <ListContainer>
       <ListHeader name={state.context.name} onChange={changeName} />
-      <div
-        className={classNames(styles['list-cards'], styles['fancy-scrollbar'])}
-      />
-      <ListFooter onAdd={addItem} />
+      <CardList cards={cards} hide={toggle} onAdd={addItem} />
+      <ListFooter onAdd={setToggle} hide={toggle} />
     </ListContainer>
   );
 };
