@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import Board from '../src/components/BoardApp';
+import Board from '../src/components/Board';
 import styles from '../styles/Root.module.css';
 
 const App: NextPage = () => {
