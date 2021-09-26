@@ -1,4 +1,4 @@
-import { assign, createMachine } from 'xstate';
+import { assign, createMachine, Interpreter } from 'xstate';
 
 interface NewListContext {
   name: string;
@@ -8,6 +8,12 @@ export type NewListEvent =
   | { type: 'CLEAR' }
   | { type: 'CHANGE'; input: string }
   | { type: 'SUBMIT'; input: string };
+
+export type NewListMachineInterpreter = Interpreter<
+  NewListContext,
+  any,
+  NewListEvent
+>;
 
 export const isNotEmpty = (context: NewListContext) => {
   return context.name.length > 2;

@@ -1,10 +1,12 @@
-import { StateMachine } from 'xstate';
+import { Interpreter, StateMachine, StateSchema } from 'xstate';
 
 export interface ItemMachineContext {
   currentItem: number;
   items: any[];
   name: string;
 }
+
+export type ItemMachineTypeState = StateSchema<ItemMachineContext>;
 
 export type ItemMachineEvent =
   | { type: 'CANCEL' }
@@ -17,5 +19,11 @@ export type ItemMachineEvent =
 export type ItemMachine = StateMachine<
   ItemMachineContext,
   any,
+  ItemMachineEvent
+>;
+
+export type ItemMachineInterpreter = Interpreter<
+  ItemMachineContext,
+  ItemMachineTypeState,
   ItemMachineEvent
 >;
