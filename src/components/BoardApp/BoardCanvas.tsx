@@ -5,8 +5,14 @@ interface CanvasProps {
   children?: React.ReactNode;
 }
 
-const Canvas = ({ children }: CanvasProps) => {
-  return <div className={styles.boardCanvas}>{children}</div>;
+const BoardCanvas = ({ children }: CanvasProps) => {
+  return (
+    <div className={styles['board-canvas']}>
+      <div id={styles.board} className={styles['fancy-scrollbar']}>
+        {children}
+      </div>
+    </div>
+  );
 };
 
-export default Canvas;
+export default BoardCanvas;
