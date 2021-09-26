@@ -23,8 +23,8 @@ const CardList = ({ cards, hide, onAdd }: CardListProps) => {
         {cards.map((card, index) => (
           <Card cardRef={card} key={index} />
         ))}
+        <CardComposer hide={hide} addItem={onAdd} />
       </div>
-      <CardComposer hide={hide} addItem={onAdd} />
     </>
   );
 };
