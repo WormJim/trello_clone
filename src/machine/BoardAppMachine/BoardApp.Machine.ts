@@ -1,79 +1,78 @@
-import { assign, createMachine, spawn } from 'xstate';
-import { BoardMachine } from '../BoardMachine/Board.Machine';
-import {
-  BoardAppMachineContext as Context,
-  BoardAppMahcineEvent as Event,
-} from './BoardApp.Machine.types';
+import { assign, createMachine, spawn, StateMachine } from 'xstate';
+import { ItemMachineContext, ItemMachineEvent } from './BoardApp.Machine.types';
 
-export const BoardAppMachine = createMachine<Context, Event>({
-  initial: 'new',
-  context: {
-    boards: [],
-    currentBoard: -1,
-  },
-  states: {
-    new: {
-      on: {
-        CANCEL: {
-          target: 'board',
-          cond: (context) => context.boards.length > 0,
+export const createItemMachine = (
+  name: string,
+): StateMachine<ItemMachineContext, any, ItemMachineEvent> =>
+  createMachine<ItemMachineContext, ItemMachineEvent>({
+    initial: 'new',
+    context: {
+      name,
+      items: [],
+      currentItem: -1,
+    },
+    states: {
+      new: {
+        on: {
+          CANCEL: {
+            target: 'item',
+            cond: (context) => context.items.length > 0,
+          },
         },
       },
-    },
-    board: {
-      on: {
-        DELETE: {
-          actions: assign((context, event) => {
-            if (event.type === 'DELETE') {
-              const boards = context.boards.filter((_, i) => i !== event.index);
-              const currentBoard = context.boards.length - 1;
+      item: {
+        on: {
+          DELETE: {
+            actions: assign((context, event) => {
+              if (event.type === 'DELETE') {
+                const items = context.items.filter((_, i) => i !== event.index);
+                const currentItem = context.items.length - 1;
+
+                return {
+                  items,
+                  currentItem,
+                };
+              }
 
               return {
-                boards,
-                currentBoard,
+                items: context.items,
+                currentItem: context.currentItem,
               };
-            }
-
-            return {
-              boards: context.boards,
-              currentBoard: context.currentBoard,
-            };
-          }),
-          target: 'deleting',
+            }),
+            target: 'deleting',
+          },
         },
       },
+      deleting: {
+        always: [
+          { target: 'new', cond: (context) => context.items.length === 0 },
+          { target: 'item' },
+        ],
+      },
     },
-    deleting: {
-      always: [
-        { target: 'new', cond: (context) => context.boards.length === 0 },
-        { target: 'board' },
-      ],
-    },
-  },
-  on: {
-    CREATE: 'new',
-    ADD: {
-      target: '.board',
-      actions: assign((context) => {
-        const newBoard = spawn(BoardMachine);
+    on: {
+      CREATE: 'new',
+      ADD: {
+        target: '.item',
+        actions: assign((context, event) => {
+          const newItemMachine = spawn(createItemMachine(event.name));
+          const items = context.items.concat(newItemMachine);
 
-        const boards = context.boards.concat(newBoard);
-
-        return {
-          boards,
-          currentBoard: boards.length - 1,
-        };
-      }),
+          return {
+            items: items,
+            currentItem: items.length - 1,
+          };
+        }),
+      },
+      SWITCH: {
+        actions: assign({
+          currentItem: (context, event) => {
+            if (event.type === 'SWITCH') {
+              return event.index;
+            }
+            return context.currentItem;
+          },
+        }),
+      },
     },
-    SWITCH: {
-      actions: assign({
-        currentBoard: (context, event) => {
-          if (event.type === 'SWITCH') {
-            return event.index;
-          }
-          return context.currentBoard;
-        },
-      }),
-    },
-  },
-});
+  });
